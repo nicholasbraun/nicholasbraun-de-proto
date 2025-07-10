@@ -57,7 +57,7 @@ message DeleteDirectoryRequest {
 
 message DeleteDirectoryResponse {}
 
-service Order {
+service Directory {
     rpc CreateDirectory(CreateDirectoryRequest) returns (CreateDirectoryResponse){}
     rpc GetDirectories(GetDirectoriesRequest) returns (GetDirectoriesResponse){}
     rpc GetDirectory(GetDirectoryRequest) returns (GetDirectoryResponse){}
