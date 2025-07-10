@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option go_package = "github.com/nicholasbraun/nicholasbraun-de-proto/directories";
+
+message Directory {
+    string id = 1;
+    string name = 2;
+    string slug = 3;
+    string path = 4;
+    string type = 5;
+    string display = 6;
+    string icon = 7;
+    string markdown = 8;
+    repeated Directory directories = 9;
+}
+
+message CreateDirectoryRequest {
+  string parent_id = 1;
+  string name = 2;
+  string type = 3;
+  string markdown = 4;
+}
+
+message CreateDirectoryResponse {
+  Directory directory = 1;
+}
+
+message GetDirectoriesRequest {}
+
+message GetDirectoriesResponse {
+  repeated Directory directories = 1;
+}
+
+message GetDirectoryRequest {
+  string id = 1;
+}
+
+message GetDirectoryResponse {
+  Directory directory = 1;
+}
+
+message UpdateDirectoryRequest {
+  string id = 1;
+  string name = 2;
+  string display = 3;
+  string icon = 4;
+  string markdown = 5;
+}
+
+message UpdateDirectoryResponse {
+  Directory directory = 1;
+}
+
+message DeleteDirectoryRequest {
+  string id = 1;
+}
+
+message DeleteDirectoryResponse {}
+
+service Order {
+    rpc CreateDirectory(CreateDirectoryRequest) returns (CreateDirectoryResponse){}
+    rpc GetDirectories(GetDirectoriesRequest) returns (GetDirectoriesResponse){}
+    rpc GetDirectory(GetDirectoryRequest) returns (GetDirectoryResponse){}
+    rpc UpdateDirectory(UpdateDirectoryRequest) returns (UpdateDirectoryResponse){}
+    rpc DeleteDirectory(DeleteDirectoryRequest) returns (DeleteDirectoryResponse){}
+}
