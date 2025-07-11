@@ -19,6 +19,8 @@ message CreateDirectoryRequest {
   string name = 2;
   string type = 3;
   string markdown = 4;
+  string icon = 5;
+  string display = 6;
 }
 
 message CreateDirectoryResponse {
