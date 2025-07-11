@@ -135,6 +135,8 @@ type CreateDirectoryRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Markdown      string                 `protobuf:"bytes,4,opt,name=markdown,proto3" json:"markdown,omitempty"`
+	Icon          string                 `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
+	Display       string                 `protobuf:"bytes,6,opt,name=display,proto3" json:"display,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -193,6 +195,20 @@ func (x *CreateDirectoryRequest) GetType() string {
 func (x *CreateDirectoryRequest) GetMarkdown() string {
 	if x != nil {
 		return x.Markdown
+	}
+	return ""
+}
+
+func (x *CreateDirectoryRequest) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *CreateDirectoryRequest) GetDisplay() string {
+	if x != nil {
+		return x.Display
 	}
 	return ""
 }
@@ -624,12 +640,14 @@ const file_directories_directories_proto_rawDesc = "" +
 	"\x04icon\x18\a \x01(\tR\x04icon\x12\x1a\n" +
 	"\bmarkdown\x18\b \x01(\tR\bmarkdown\x12,\n" +
 	"\vdirectories\x18\t \x03(\v2\n" +
-	".DirectoryR\vdirectories\"y\n" +
+	".DirectoryR\vdirectories\"\xa7\x01\n" +
 	"\x16CreateDirectoryRequest\x12\x1b\n" +
 	"\tparent_id\x18\x01 \x01(\tR\bparentId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
-	"\bmarkdown\x18\x04 \x01(\tR\bmarkdown\"C\n" +
+	"\bmarkdown\x18\x04 \x01(\tR\bmarkdown\x12\x12\n" +
+	"\x04icon\x18\x05 \x01(\tR\x04icon\x12\x18\n" +
+	"\adisplay\x18\x06 \x01(\tR\adisplay\"C\n" +
 	"\x17CreateDirectoryResponse\x12(\n" +
 	"\tdirectory\x18\x01 \x01(\v2\n" +
 	".DirectoryR\tdirectory\"\x17\n" +
