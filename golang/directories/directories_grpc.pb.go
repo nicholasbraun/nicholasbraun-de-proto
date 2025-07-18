@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DirectoryService_CreateDirectory_FullMethodName = "/DirectoryService/CreateDirectory"
-	DirectoryService_GetDirectories_FullMethodName  = "/DirectoryService/GetDirectories"
-	DirectoryService_GetDirectory_FullMethodName    = "/DirectoryService/GetDirectory"
-	DirectoryService_UpdateDirectory_FullMethodName = "/DirectoryService/UpdateDirectory"
-	DirectoryService_DeleteDirectory_FullMethodName = "/DirectoryService/DeleteDirectory"
+	DirectoryService_CreateDirectory_FullMethodName  = "/DirectoryService/CreateDirectory"
+	DirectoryService_GetDirectories_FullMethodName   = "/DirectoryService/GetDirectories"
+	DirectoryService_GetDirectoryById_FullMethodName = "/DirectoryService/GetDirectoryById"
+	DirectoryService_UpdateDirectory_FullMethodName  = "/DirectoryService/UpdateDirectory"
+	DirectoryService_DeleteDirectory_FullMethodName  = "/DirectoryService/DeleteDirectory"
 )
 
 // DirectoryServiceClient is the client API for DirectoryService service.
@@ -32,7 +32,7 @@ const (
 type DirectoryServiceClient interface {
 	CreateDirectory(ctx context.Context, in *CreateDirectoryRequest, opts ...grpc.CallOption) (*CreateDirectoryResponse, error)
 	GetDirectories(ctx context.Context, in *GetDirectoriesRequest, opts ...grpc.CallOption) (*GetDirectoriesResponse, error)
-	GetDirectory(ctx context.Context, in *GetDirectoryRequest, opts ...grpc.CallOption) (*GetDirectoryResponse, error)
+	GetDirectoryById(ctx context.Context, in *GetDirectoryByIdRequest, opts ...grpc.CallOption) (*GetDirectoryByIdResponse, error)
 	UpdateDirectory(ctx context.Context, in *UpdateDirectoryRequest, opts ...grpc.CallOption) (*UpdateDirectoryResponse, error)
 	DeleteDirectory(ctx context.Context, in *DeleteDirectoryRequest, opts ...grpc.CallOption) (*DeleteDirectoryResponse, error)
 }
@@ -65,10 +65,10 @@ func (c *directoryServiceClient) GetDirectories(ctx context.Context, in *GetDire
 	return out, nil
 }
 
-func (c *directoryServiceClient) GetDirectory(ctx context.Context, in *GetDirectoryRequest, opts ...grpc.CallOption) (*GetDirectoryResponse, error) {
+func (c *directoryServiceClient) GetDirectoryById(ctx context.Context, in *GetDirectoryByIdRequest, opts ...grpc.CallOption) (*GetDirectoryByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDirectoryResponse)
-	err := c.cc.Invoke(ctx, DirectoryService_GetDirectory_FullMethodName, in, out, cOpts...)
+	out := new(GetDirectoryByIdResponse)
+	err := c.cc.Invoke(ctx, DirectoryService_GetDirectoryById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ func (c *directoryServiceClient) DeleteDirectory(ctx context.Context, in *Delete
 type DirectoryServiceServer interface {
 	CreateDirectory(context.Context, *CreateDirectoryRequest) (*CreateDirectoryResponse, error)
 	GetDirectories(context.Context, *GetDirectoriesRequest) (*GetDirectoriesResponse, error)
-	GetDirectory(context.Context, *GetDirectoryRequest) (*GetDirectoryResponse, error)
+	GetDirectoryById(context.Context, *GetDirectoryByIdRequest) (*GetDirectoryByIdResponse, error)
 	UpdateDirectory(context.Context, *UpdateDirectoryRequest) (*UpdateDirectoryResponse, error)
 	DeleteDirectory(context.Context, *DeleteDirectoryRequest) (*DeleteDirectoryResponse, error)
 	mustEmbedUnimplementedDirectoryServiceServer()
@@ -120,8 +120,8 @@ func (UnimplementedDirectoryServiceServer) CreateDirectory(context.Context, *Cre
 func (UnimplementedDirectoryServiceServer) GetDirectories(context.Context, *GetDirectoriesRequest) (*GetDirectoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDirectories not implemented")
 }
-func (UnimplementedDirectoryServiceServer) GetDirectory(context.Context, *GetDirectoryRequest) (*GetDirectoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDirectory not implemented")
+func (UnimplementedDirectoryServiceServer) GetDirectoryById(context.Context, *GetDirectoryByIdRequest) (*GetDirectoryByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDirectoryById not implemented")
 }
 func (UnimplementedDirectoryServiceServer) UpdateDirectory(context.Context, *UpdateDirectoryRequest) (*UpdateDirectoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDirectory not implemented")
@@ -186,20 +186,20 @@ func _DirectoryService_GetDirectories_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DirectoryService_GetDirectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDirectoryRequest)
+func _DirectoryService_GetDirectoryById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDirectoryByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DirectoryServiceServer).GetDirectory(ctx, in)
+		return srv.(DirectoryServiceServer).GetDirectoryById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DirectoryService_GetDirectory_FullMethodName,
+		FullMethod: DirectoryService_GetDirectoryById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DirectoryServiceServer).GetDirectory(ctx, req.(*GetDirectoryRequest))
+		return srv.(DirectoryServiceServer).GetDirectoryById(ctx, req.(*GetDirectoryByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -256,8 +256,8 @@ var DirectoryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DirectoryService_GetDirectories_Handler,
 		},
 		{
-			MethodName: "GetDirectory",
-			Handler:    _DirectoryService_GetDirectory_Handler,
+			MethodName: "GetDirectoryById",
+			Handler:    _DirectoryService_GetDirectoryById_Handler,
 		},
 		{
 			MethodName: "UpdateDirectory",
