@@ -353,27 +353,30 @@ func (x *GetDirectoriesResponse) GetDirectories() []*Directory {
 	return nil
 }
 
-type GetDirectoryByIdRequest struct {
+type GetDirectoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ParentId      string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetDirectoryByIdRequest) Reset() {
-	*x = GetDirectoryByIdRequest{}
+func (x *GetDirectoryRequest) Reset() {
+	*x = GetDirectoryRequest{}
 	mi := &file_directories_directories_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetDirectoryByIdRequest) String() string {
+func (x *GetDirectoryRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDirectoryByIdRequest) ProtoMessage() {}
+func (*GetDirectoryRequest) ProtoMessage() {}
 
-func (x *GetDirectoryByIdRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDirectoryRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_directories_directories_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -385,39 +388,60 @@ func (x *GetDirectoryByIdRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDirectoryByIdRequest.ProtoReflect.Descriptor instead.
-func (*GetDirectoryByIdRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetDirectoryRequest) Descriptor() ([]byte, []int) {
 	return file_directories_directories_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetDirectoryByIdRequest) GetId() string {
+func (x *GetDirectoryRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-type GetDirectoryByIdResponse struct {
+func (x *GetDirectoryRequest) GetParentId() string {
+	if x != nil {
+		return x.ParentId
+	}
+	return ""
+}
+
+func (x *GetDirectoryRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetDirectoryRequest) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+type GetDirectoryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Directory     *Directory             `protobuf:"bytes,1,opt,name=directory,proto3" json:"directory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetDirectoryByIdResponse) Reset() {
-	*x = GetDirectoryByIdResponse{}
+func (x *GetDirectoryResponse) Reset() {
+	*x = GetDirectoryResponse{}
 	mi := &file_directories_directories_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetDirectoryByIdResponse) String() string {
+func (x *GetDirectoryResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDirectoryByIdResponse) ProtoMessage() {}
+func (*GetDirectoryResponse) ProtoMessage() {}
 
-func (x *GetDirectoryByIdResponse) ProtoReflect() protoreflect.Message {
+func (x *GetDirectoryResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_directories_directories_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -429,12 +453,12 @@ func (x *GetDirectoryByIdResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDirectoryByIdResponse.ProtoReflect.Descriptor instead.
-func (*GetDirectoryByIdResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetDirectoryResponse) Descriptor() ([]byte, []int) {
 	return file_directories_directories_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetDirectoryByIdResponse) GetDirectory() *Directory {
+func (x *GetDirectoryResponse) GetDirectory() *Directory {
 	if x != nil {
 		return x.Directory
 	}
@@ -672,10 +696,13 @@ const file_directories_directories_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"F\n" +
 	"\x16GetDirectoriesResponse\x12,\n" +
 	"\vdirectories\x18\x01 \x03(\v2\n" +
-	".DirectoryR\vdirectories\")\n" +
-	"\x17GetDirectoryByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"D\n" +
-	"\x18GetDirectoryByIdResponse\x12(\n" +
+	".DirectoryR\vdirectories\"j\n" +
+	"\x13GetDirectoryRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\tparent_id\x18\x02 \x01(\tR\bparentId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
+	"\x04path\x18\x04 \x01(\tR\x04path\"@\n" +
+	"\x14GetDirectoryResponse\x12(\n" +
 	"\tdirectory\x18\x01 \x01(\v2\n" +
 	".DirectoryR\tdirectory\"\x86\x01\n" +
 	"\x16UpdateDirectoryRequest\x12\x0e\n" +
@@ -689,11 +716,11 @@ const file_directories_directories_proto_rawDesc = "" +
 	".DirectoryR\tdirectory\"(\n" +
 	"\x16DeleteDirectoryRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x19\n" +
-	"\x17DeleteDirectoryResponse2\xfa\x02\n" +
+	"\x17DeleteDirectoryResponse2\xee\x02\n" +
 	"\x10DirectoryService\x12F\n" +
 	"\x0fCreateDirectory\x12\x17.CreateDirectoryRequest\x1a\x18.CreateDirectoryResponse\"\x00\x12C\n" +
-	"\x0eGetDirectories\x12\x16.GetDirectoriesRequest\x1a\x17.GetDirectoriesResponse\"\x00\x12I\n" +
-	"\x10GetDirectoryById\x12\x18.GetDirectoryByIdRequest\x1a\x19.GetDirectoryByIdResponse\"\x00\x12F\n" +
+	"\x0eGetDirectories\x12\x16.GetDirectoriesRequest\x1a\x17.GetDirectoriesResponse\"\x00\x12=\n" +
+	"\fGetDirectory\x12\x14.GetDirectoryRequest\x1a\x15.GetDirectoryResponse\"\x00\x12F\n" +
 	"\x0fUpdateDirectory\x12\x17.UpdateDirectoryRequest\x1a\x18.UpdateDirectoryResponse\"\x00\x12F\n" +
 	"\x0fDeleteDirectory\x12\x17.DeleteDirectoryRequest\x1a\x18.DeleteDirectoryResponse\"\x00B=Z;github.com/nicholasbraun/nicholasbraun-de-proto/directoriesb\x06proto3"
 
@@ -711,32 +738,32 @@ func file_directories_directories_proto_rawDescGZIP() []byte {
 
 var file_directories_directories_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_directories_directories_proto_goTypes = []any{
-	(*Directory)(nil),                // 0: Directory
-	(*CreateDirectoryRequest)(nil),   // 1: CreateDirectoryRequest
-	(*CreateDirectoryResponse)(nil),  // 2: CreateDirectoryResponse
-	(*GetDirectoriesRequest)(nil),    // 3: GetDirectoriesRequest
-	(*GetDirectoriesResponse)(nil),   // 4: GetDirectoriesResponse
-	(*GetDirectoryByIdRequest)(nil),  // 5: GetDirectoryByIdRequest
-	(*GetDirectoryByIdResponse)(nil), // 6: GetDirectoryByIdResponse
-	(*UpdateDirectoryRequest)(nil),   // 7: UpdateDirectoryRequest
-	(*UpdateDirectoryResponse)(nil),  // 8: UpdateDirectoryResponse
-	(*DeleteDirectoryRequest)(nil),   // 9: DeleteDirectoryRequest
-	(*DeleteDirectoryResponse)(nil),  // 10: DeleteDirectoryResponse
+	(*Directory)(nil),               // 0: Directory
+	(*CreateDirectoryRequest)(nil),  // 1: CreateDirectoryRequest
+	(*CreateDirectoryResponse)(nil), // 2: CreateDirectoryResponse
+	(*GetDirectoriesRequest)(nil),   // 3: GetDirectoriesRequest
+	(*GetDirectoriesResponse)(nil),  // 4: GetDirectoriesResponse
+	(*GetDirectoryRequest)(nil),     // 5: GetDirectoryRequest
+	(*GetDirectoryResponse)(nil),    // 6: GetDirectoryResponse
+	(*UpdateDirectoryRequest)(nil),  // 7: UpdateDirectoryRequest
+	(*UpdateDirectoryResponse)(nil), // 8: UpdateDirectoryResponse
+	(*DeleteDirectoryRequest)(nil),  // 9: DeleteDirectoryRequest
+	(*DeleteDirectoryResponse)(nil), // 10: DeleteDirectoryResponse
 }
 var file_directories_directories_proto_depIdxs = []int32{
 	0,  // 0: Directory.directories:type_name -> Directory
 	0,  // 1: CreateDirectoryResponse.directory:type_name -> Directory
 	0,  // 2: GetDirectoriesResponse.directories:type_name -> Directory
-	0,  // 3: GetDirectoryByIdResponse.directory:type_name -> Directory
+	0,  // 3: GetDirectoryResponse.directory:type_name -> Directory
 	0,  // 4: UpdateDirectoryResponse.directory:type_name -> Directory
 	1,  // 5: DirectoryService.CreateDirectory:input_type -> CreateDirectoryRequest
 	3,  // 6: DirectoryService.GetDirectories:input_type -> GetDirectoriesRequest
-	5,  // 7: DirectoryService.GetDirectoryById:input_type -> GetDirectoryByIdRequest
+	5,  // 7: DirectoryService.GetDirectory:input_type -> GetDirectoryRequest
 	7,  // 8: DirectoryService.UpdateDirectory:input_type -> UpdateDirectoryRequest
 	9,  // 9: DirectoryService.DeleteDirectory:input_type -> DeleteDirectoryRequest
 	2,  // 10: DirectoryService.CreateDirectory:output_type -> CreateDirectoryResponse
 	4,  // 11: DirectoryService.GetDirectories:output_type -> GetDirectoriesResponse
-	6,  // 12: DirectoryService.GetDirectoryById:output_type -> GetDirectoryByIdResponse
+	6,  // 12: DirectoryService.GetDirectory:output_type -> GetDirectoryResponse
 	8,  // 13: DirectoryService.UpdateDirectory:output_type -> UpdateDirectoryResponse
 	10, // 14: DirectoryService.DeleteDirectory:output_type -> DeleteDirectoryResponse
 	10, // [10:15] is the sub-list for method output_type
