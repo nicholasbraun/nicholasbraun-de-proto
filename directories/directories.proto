@@ -27,17 +27,20 @@ message CreateDirectoryResponse {
   Directory directory = 1;
 }
 
-message GetDirectoriesRequest {}
+message GetDirectoriesRequest {
+  string parent_id = 1;
+  string name = 2;
+}
 
 message GetDirectoriesResponse {
   repeated Directory directories = 1;
 }
 
-message GetDirectoryRequest {
+message GetDirectoryByIdRequest {
   string id = 1;
 }
 
-message GetDirectoryResponse {
+message GetDirectoryByIdResponse {
   Directory directory = 1;
 }
 
@@ -62,7 +65,7 @@ message DeleteDirectoryResponse {}
 service DirectoryService {
     rpc CreateDirectory(CreateDirectoryRequest) returns (CreateDirectoryResponse){}
     rpc GetDirectories(GetDirectoriesRequest) returns (GetDirectoriesResponse){}
-    rpc GetDirectory(GetDirectoryRequest) returns (GetDirectoryResponse){}
+    rpc GetDirectoryById(GetDirectoryByIdRequest) returns (GetDirectoryByIdResponse){}
     rpc UpdateDirectory(UpdateDirectoryRequest) returns (UpdateDirectoryResponse){}
     rpc DeleteDirectory(DeleteDirectoryRequest) returns (DeleteDirectoryResponse){}
 }
