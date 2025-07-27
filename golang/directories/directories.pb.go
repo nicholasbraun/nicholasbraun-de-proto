@@ -28,9 +28,9 @@ type Directory struct {
 	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
 	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	Display       string                 `protobuf:"bytes,6,opt,name=display,proto3" json:"display,omitempty"`
+	Display       *string                `protobuf:"bytes,6,opt,name=display,proto3,oneof" json:"display,omitempty"`
 	Icon          string                 `protobuf:"bytes,7,opt,name=icon,proto3" json:"icon,omitempty"`
-	Markdown      string                 `protobuf:"bytes,8,opt,name=markdown,proto3" json:"markdown,omitempty"`
+	Markdown      *string                `protobuf:"bytes,8,opt,name=markdown,proto3,oneof" json:"markdown,omitempty"`
 	Directories   []*Directory           `protobuf:"bytes,9,rep,name=directories,proto3" json:"directories,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -102,8 +102,8 @@ func (x *Directory) GetType() string {
 }
 
 func (x *Directory) GetDisplay() string {
-	if x != nil {
-		return x.Display
+	if x != nil && x.Display != nil {
+		return *x.Display
 	}
 	return ""
 }
@@ -116,8 +116,8 @@ func (x *Directory) GetIcon() string {
 }
 
 func (x *Directory) GetMarkdown() string {
-	if x != nil {
-		return x.Markdown
+	if x != nil && x.Markdown != nil {
+		return *x.Markdown
 	}
 	return ""
 }
@@ -134,9 +134,9 @@ type CreateDirectoryRequest struct {
 	ParentId      string                 `protobuf:"bytes,1,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Markdown      string                 `protobuf:"bytes,4,opt,name=markdown,proto3" json:"markdown,omitempty"`
+	Markdown      *string                `protobuf:"bytes,4,opt,name=markdown,proto3,oneof" json:"markdown,omitempty"`
 	Icon          string                 `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
-	Display       string                 `protobuf:"bytes,6,opt,name=display,proto3" json:"display,omitempty"`
+	Display       *string                `protobuf:"bytes,6,opt,name=display,proto3,oneof" json:"display,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -193,8 +193,8 @@ func (x *CreateDirectoryRequest) GetType() string {
 }
 
 func (x *CreateDirectoryRequest) GetMarkdown() string {
-	if x != nil {
-		return x.Markdown
+	if x != nil && x.Markdown != nil {
+		return *x.Markdown
 	}
 	return ""
 }
@@ -207,8 +207,8 @@ func (x *CreateDirectoryRequest) GetIcon() string {
 }
 
 func (x *CreateDirectoryRequest) GetDisplay() string {
-	if x != nil {
-		return x.Display
+	if x != nil && x.Display != nil {
+		return *x.Display
 	}
 	return ""
 }
@@ -355,10 +355,10 @@ func (x *GetDirectoriesResponse) GetDirectories() []*Directory {
 
 type GetDirectoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ParentId      string                 `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	ParentId      *string                `protobuf:"bytes,2,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	Name          *string                `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Path          *string                `protobuf:"bytes,4,opt,name=path,proto3,oneof" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -394,29 +394,29 @@ func (*GetDirectoryRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GetDirectoryRequest) GetId() string {
-	if x != nil {
-		return x.Id
+	if x != nil && x.Id != nil {
+		return *x.Id
 	}
 	return ""
 }
 
 func (x *GetDirectoryRequest) GetParentId() string {
-	if x != nil {
-		return x.ParentId
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
 	}
 	return ""
 }
 
 func (x *GetDirectoryRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *GetDirectoryRequest) GetPath() string {
-	if x != nil {
-		return x.Path
+	if x != nil && x.Path != nil {
+		return *x.Path
 	}
 	return ""
 }
@@ -468,10 +468,10 @@ func (x *GetDirectoryResponse) GetDirectory() *Directory {
 type UpdateDirectoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Display       string                 `protobuf:"bytes,3,opt,name=display,proto3" json:"display,omitempty"`
-	Icon          string                 `protobuf:"bytes,4,opt,name=icon,proto3" json:"icon,omitempty"`
-	Markdown      string                 `protobuf:"bytes,5,opt,name=markdown,proto3" json:"markdown,omitempty"`
+	Name          *string                `protobuf:"bytes,2,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Display       *string                `protobuf:"bytes,3,opt,name=display,proto3,oneof" json:"display,omitempty"`
+	Icon          *string                `protobuf:"bytes,4,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
+	Markdown      *string                `protobuf:"bytes,5,opt,name=markdown,proto3,oneof" json:"markdown,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -514,29 +514,29 @@ func (x *UpdateDirectoryRequest) GetId() string {
 }
 
 func (x *UpdateDirectoryRequest) GetName() string {
-	if x != nil {
-		return x.Name
+	if x != nil && x.Name != nil {
+		return *x.Name
 	}
 	return ""
 }
 
 func (x *UpdateDirectoryRequest) GetDisplay() string {
-	if x != nil {
-		return x.Display
+	if x != nil && x.Display != nil {
+		return *x.Display
 	}
 	return ""
 }
 
 func (x *UpdateDirectoryRequest) GetIcon() string {
-	if x != nil {
-		return x.Icon
+	if x != nil && x.Icon != nil {
+		return *x.Icon
 	}
 	return ""
 }
 
 func (x *UpdateDirectoryRequest) GetMarkdown() string {
-	if x != nil {
-		return x.Markdown
+	if x != nil && x.Markdown != nil {
+		return *x.Markdown
 	}
 	return ""
 }
@@ -669,25 +669,31 @@ var File_directories_directories_proto protoreflect.FileDescriptor
 
 const file_directories_directories_proto_rawDesc = "" +
 	"\n" +
-	"\x1ddirectories/directories.proto\"\xe3\x01\n" +
+	"\x1ddirectories/directories.proto\"\x86\x02\n" +
 	"\tDirectory\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x12\n" +
 	"\x04path\x18\x04 \x01(\tR\x04path\x12\x12\n" +
-	"\x04type\x18\x05 \x01(\tR\x04type\x12\x18\n" +
-	"\adisplay\x18\x06 \x01(\tR\adisplay\x12\x12\n" +
-	"\x04icon\x18\a \x01(\tR\x04icon\x12\x1a\n" +
-	"\bmarkdown\x18\b \x01(\tR\bmarkdown\x12,\n" +
+	"\x04type\x18\x05 \x01(\tR\x04type\x12\x1d\n" +
+	"\adisplay\x18\x06 \x01(\tH\x00R\adisplay\x88\x01\x01\x12\x12\n" +
+	"\x04icon\x18\a \x01(\tR\x04icon\x12\x1f\n" +
+	"\bmarkdown\x18\b \x01(\tH\x01R\bmarkdown\x88\x01\x01\x12,\n" +
 	"\vdirectories\x18\t \x03(\v2\n" +
-	".DirectoryR\vdirectories\"\xa7\x01\n" +
+	".DirectoryR\vdirectoriesB\n" +
+	"\n" +
+	"\b_displayB\v\n" +
+	"\t_markdown\"\xca\x01\n" +
 	"\x16CreateDirectoryRequest\x12\x1b\n" +
 	"\tparent_id\x18\x01 \x01(\tR\bparentId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
-	"\bmarkdown\x18\x04 \x01(\tR\bmarkdown\x12\x12\n" +
-	"\x04icon\x18\x05 \x01(\tR\x04icon\x12\x18\n" +
-	"\adisplay\x18\x06 \x01(\tR\adisplay\"C\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1f\n" +
+	"\bmarkdown\x18\x04 \x01(\tH\x00R\bmarkdown\x88\x01\x01\x12\x12\n" +
+	"\x04icon\x18\x05 \x01(\tR\x04icon\x12\x1d\n" +
+	"\adisplay\x18\x06 \x01(\tH\x01R\adisplay\x88\x01\x01B\v\n" +
+	"\t_markdownB\n" +
+	"\n" +
+	"\b_display\"C\n" +
 	"\x17CreateDirectoryResponse\x12(\n" +
 	"\tdirectory\x18\x01 \x01(\v2\n" +
 	".DirectoryR\tdirectory\"H\n" +
@@ -696,21 +702,31 @@ const file_directories_directories_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"F\n" +
 	"\x16GetDirectoriesResponse\x12,\n" +
 	"\vdirectories\x18\x01 \x03(\v2\n" +
-	".DirectoryR\vdirectories\"j\n" +
-	"\x13GetDirectoryRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tparent_id\x18\x02 \x01(\tR\bparentId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
-	"\x04path\x18\x04 \x01(\tR\x04path\"@\n" +
+	".DirectoryR\vdirectories\"\xa5\x01\n" +
+	"\x13GetDirectoryRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12 \n" +
+	"\tparent_id\x18\x02 \x01(\tH\x01R\bparentId\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x02R\x04name\x88\x01\x01\x12\x17\n" +
+	"\x04path\x18\x04 \x01(\tH\x03R\x04path\x88\x01\x01B\x05\n" +
+	"\x03_idB\f\n" +
+	"\n" +
+	"_parent_idB\a\n" +
+	"\x05_nameB\a\n" +
+	"\x05_path\"@\n" +
 	"\x14GetDirectoryResponse\x12(\n" +
 	"\tdirectory\x18\x01 \x01(\v2\n" +
-	".DirectoryR\tdirectory\"\x86\x01\n" +
+	".DirectoryR\tdirectory\"\xc5\x01\n" +
 	"\x16UpdateDirectoryRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\adisplay\x18\x03 \x01(\tR\adisplay\x12\x12\n" +
-	"\x04icon\x18\x04 \x01(\tR\x04icon\x12\x1a\n" +
-	"\bmarkdown\x18\x05 \x01(\tR\bmarkdown\"C\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x1d\n" +
+	"\adisplay\x18\x03 \x01(\tH\x01R\adisplay\x88\x01\x01\x12\x17\n" +
+	"\x04icon\x18\x04 \x01(\tH\x02R\x04icon\x88\x01\x01\x12\x1f\n" +
+	"\bmarkdown\x18\x05 \x01(\tH\x03R\bmarkdown\x88\x01\x01B\a\n" +
+	"\x05_nameB\n" +
+	"\n" +
+	"\b_displayB\a\n" +
+	"\x05_iconB\v\n" +
+	"\t_markdown\"C\n" +
 	"\x17UpdateDirectoryResponse\x12(\n" +
 	"\tdirectory\x18\x01 \x01(\v2\n" +
 	".DirectoryR\tdirectory\"(\n" +
@@ -778,6 +794,10 @@ func file_directories_directories_proto_init() {
 	if File_directories_directories_proto != nil {
 		return
 	}
+	file_directories_directories_proto_msgTypes[0].OneofWrappers = []any{}
+	file_directories_directories_proto_msgTypes[1].OneofWrappers = []any{}
+	file_directories_directories_proto_msgTypes[5].OneofWrappers = []any{}
+	file_directories_directories_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
