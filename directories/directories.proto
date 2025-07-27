@@ -8,9 +8,9 @@ message Directory {
     string slug = 3;
     string path = 4;
     string type = 5;
-    string display = 6;
+    optional string display = 6;
     string icon = 7;
-    string markdown = 8;
+    optional string markdown = 8;
     repeated Directory directories = 9;
 }
 
@@ -18,9 +18,9 @@ message CreateDirectoryRequest {
   string parent_id = 1;
   string name = 2;
   string type = 3;
-  string markdown = 4;
+  optional string markdown = 4;
   string icon = 5;
-  string display = 6;
+  optional string display = 6;
 }
 
 message CreateDirectoryResponse {
@@ -37,10 +37,10 @@ message GetDirectoriesResponse {
 }
 
 message GetDirectoryRequest {
-  string id = 1;
-  string parent_id = 2;
-  string name = 3;
-  string path = 4;
+  optional string id = 1;
+  optional string parent_id = 2;
+  optional string name = 3;
+  optional string path = 4;
 }
 
 message GetDirectoryResponse {
@@ -49,10 +49,10 @@ message GetDirectoryResponse {
 
 message UpdateDirectoryRequest {
   string id = 1;
-  string name = 2;
-  string display = 3;
-  string icon = 4;
-  string markdown = 5;
+  optional string name = 2;
+  optional string display = 3;
+  optional string icon = 4;
+  optional string markdown = 5;
 }
 
 message UpdateDirectoryResponse {
