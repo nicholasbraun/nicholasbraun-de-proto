@@ -29,7 +29,7 @@ message AuthenticateResponse {
 }
 
 
-service DirectoryService {
+service AuthService {
     rpc SignInUser(SignInUserRequest) returns (SignInUserResponse){}
     rpc SignUpUser(SignUpUserRequest) returns (SignUpUserResponse){}
     rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse){}
