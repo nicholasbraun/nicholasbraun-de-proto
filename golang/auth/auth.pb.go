@@ -321,8 +321,8 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\x13AuthenticateRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"<\n" +
 	"\x14AuthenticateResponse\x12$\n" +
-	"\rauthenticated\x18\x01 \x01(\bR\rauthenticated2\xc3\x01\n" +
-	"\x10DirectoryService\x127\n" +
+	"\rauthenticated\x18\x01 \x01(\bR\rauthenticated2\xbe\x01\n" +
+	"\vAuthService\x127\n" +
 	"\n" +
 	"SignInUser\x12\x12.SignInUserRequest\x1a\x13.SignInUserResponse\"\x00\x127\n" +
 	"\n" +
@@ -351,12 +351,12 @@ var file_auth_auth_proto_goTypes = []any{
 	(*AuthenticateResponse)(nil), // 5: AuthenticateResponse
 }
 var file_auth_auth_proto_depIdxs = []int32{
-	0, // 0: DirectoryService.SignInUser:input_type -> SignInUserRequest
-	2, // 1: DirectoryService.SignUpUser:input_type -> SignUpUserRequest
-	4, // 2: DirectoryService.Authenticate:input_type -> AuthenticateRequest
-	1, // 3: DirectoryService.SignInUser:output_type -> SignInUserResponse
-	3, // 4: DirectoryService.SignUpUser:output_type -> SignUpUserResponse
-	5, // 5: DirectoryService.Authenticate:output_type -> AuthenticateResponse
+	0, // 0: AuthService.SignInUser:input_type -> SignInUserRequest
+	2, // 1: AuthService.SignUpUser:input_type -> SignUpUserRequest
+	4, // 2: AuthService.Authenticate:input_type -> AuthenticateRequest
+	1, // 3: AuthService.SignInUser:output_type -> SignInUserResponse
+	3, // 4: AuthService.SignUpUser:output_type -> SignUpUserResponse
+	5, // 5: AuthService.Authenticate:output_type -> AuthenticateResponse
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

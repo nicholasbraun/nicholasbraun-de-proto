@@ -19,177 +19,177 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DirectoryService_SignInUser_FullMethodName   = "/DirectoryService/SignInUser"
-	DirectoryService_SignUpUser_FullMethodName   = "/DirectoryService/SignUpUser"
-	DirectoryService_Authenticate_FullMethodName = "/DirectoryService/Authenticate"
+	AuthService_SignInUser_FullMethodName   = "/AuthService/SignInUser"
+	AuthService_SignUpUser_FullMethodName   = "/AuthService/SignUpUser"
+	AuthService_Authenticate_FullMethodName = "/AuthService/Authenticate"
 )
 
-// DirectoryServiceClient is the client API for DirectoryService service.
+// AuthServiceClient is the client API for AuthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DirectoryServiceClient interface {
+type AuthServiceClient interface {
 	SignInUser(ctx context.Context, in *SignInUserRequest, opts ...grpc.CallOption) (*SignInUserResponse, error)
 	SignUpUser(ctx context.Context, in *SignUpUserRequest, opts ...grpc.CallOption) (*SignUpUserResponse, error)
 	Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error)
 }
 
-type directoryServiceClient struct {
+type authServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDirectoryServiceClient(cc grpc.ClientConnInterface) DirectoryServiceClient {
-	return &directoryServiceClient{cc}
+func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
+	return &authServiceClient{cc}
 }
 
-func (c *directoryServiceClient) SignInUser(ctx context.Context, in *SignInUserRequest, opts ...grpc.CallOption) (*SignInUserResponse, error) {
+func (c *authServiceClient) SignInUser(ctx context.Context, in *SignInUserRequest, opts ...grpc.CallOption) (*SignInUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SignInUserResponse)
-	err := c.cc.Invoke(ctx, DirectoryService_SignInUser_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthService_SignInUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *directoryServiceClient) SignUpUser(ctx context.Context, in *SignUpUserRequest, opts ...grpc.CallOption) (*SignUpUserResponse, error) {
+func (c *authServiceClient) SignUpUser(ctx context.Context, in *SignUpUserRequest, opts ...grpc.CallOption) (*SignUpUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SignUpUserResponse)
-	err := c.cc.Invoke(ctx, DirectoryService_SignUpUser_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthService_SignUpUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *directoryServiceClient) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error) {
+func (c *authServiceClient) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthenticateResponse)
-	err := c.cc.Invoke(ctx, DirectoryService_Authenticate_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthService_Authenticate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DirectoryServiceServer is the server API for DirectoryService service.
-// All implementations must embed UnimplementedDirectoryServiceServer
+// AuthServiceServer is the server API for AuthService service.
+// All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
-type DirectoryServiceServer interface {
+type AuthServiceServer interface {
 	SignInUser(context.Context, *SignInUserRequest) (*SignInUserResponse, error)
 	SignUpUser(context.Context, *SignUpUserRequest) (*SignUpUserResponse, error)
 	Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error)
-	mustEmbedUnimplementedDirectoryServiceServer()
+	mustEmbedUnimplementedAuthServiceServer()
 }
 
-// UnimplementedDirectoryServiceServer must be embedded to have
+// UnimplementedAuthServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedDirectoryServiceServer struct{}
+type UnimplementedAuthServiceServer struct{}
 
-func (UnimplementedDirectoryServiceServer) SignInUser(context.Context, *SignInUserRequest) (*SignInUserResponse, error) {
+func (UnimplementedAuthServiceServer) SignInUser(context.Context, *SignInUserRequest) (*SignInUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignInUser not implemented")
 }
-func (UnimplementedDirectoryServiceServer) SignUpUser(context.Context, *SignUpUserRequest) (*SignUpUserResponse, error) {
+func (UnimplementedAuthServiceServer) SignUpUser(context.Context, *SignUpUserRequest) (*SignUpUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignUpUser not implemented")
 }
-func (UnimplementedDirectoryServiceServer) Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error) {
+func (UnimplementedAuthServiceServer) Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authenticate not implemented")
 }
-func (UnimplementedDirectoryServiceServer) mustEmbedUnimplementedDirectoryServiceServer() {}
-func (UnimplementedDirectoryServiceServer) testEmbeddedByValue()                          {}
+func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
+func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
 
-// UnsafeDirectoryServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DirectoryServiceServer will
+// UnsafeAuthServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AuthServiceServer will
 // result in compilation errors.
-type UnsafeDirectoryServiceServer interface {
-	mustEmbedUnimplementedDirectoryServiceServer()
+type UnsafeAuthServiceServer interface {
+	mustEmbedUnimplementedAuthServiceServer()
 }
 
-func RegisterDirectoryServiceServer(s grpc.ServiceRegistrar, srv DirectoryServiceServer) {
-	// If the following call pancis, it indicates UnimplementedDirectoryServiceServer was
+func RegisterAuthServiceServer(s grpc.ServiceRegistrar, srv AuthServiceServer) {
+	// If the following call pancis, it indicates UnimplementedAuthServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&DirectoryService_ServiceDesc, srv)
+	s.RegisterService(&AuthService_ServiceDesc, srv)
 }
 
-func _DirectoryService_SignInUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthService_SignInUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SignInUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DirectoryServiceServer).SignInUser(ctx, in)
+		return srv.(AuthServiceServer).SignInUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DirectoryService_SignInUser_FullMethodName,
+		FullMethod: AuthService_SignInUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DirectoryServiceServer).SignInUser(ctx, req.(*SignInUserRequest))
+		return srv.(AuthServiceServer).SignInUser(ctx, req.(*SignInUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DirectoryService_SignUpUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthService_SignUpUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SignUpUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DirectoryServiceServer).SignUpUser(ctx, in)
+		return srv.(AuthServiceServer).SignUpUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DirectoryService_SignUpUser_FullMethodName,
+		FullMethod: AuthService_SignUpUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DirectoryServiceServer).SignUpUser(ctx, req.(*SignUpUserRequest))
+		return srv.(AuthServiceServer).SignUpUser(ctx, req.(*SignUpUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DirectoryService_Authenticate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthService_Authenticate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AuthenticateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DirectoryServiceServer).Authenticate(ctx, in)
+		return srv.(AuthServiceServer).Authenticate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DirectoryService_Authenticate_FullMethodName,
+		FullMethod: AuthService_Authenticate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DirectoryServiceServer).Authenticate(ctx, req.(*AuthenticateRequest))
+		return srv.(AuthServiceServer).Authenticate(ctx, req.(*AuthenticateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// DirectoryService_ServiceDesc is the grpc.ServiceDesc for DirectoryService service.
+// AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var DirectoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "DirectoryService",
-	HandlerType: (*DirectoryServiceServer)(nil),
+var AuthService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "AuthService",
+	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SignInUser",
-			Handler:    _DirectoryService_SignInUser_Handler,
+			Handler:    _AuthService_SignInUser_Handler,
 		},
 		{
 			MethodName: "SignUpUser",
-			Handler:    _DirectoryService_SignUpUser_Handler,
+			Handler:    _AuthService_SignUpUser_Handler,
 		},
 		{
 			MethodName: "Authenticate",
-			Handler:    _DirectoryService_Authenticate_Handler,
+			Handler:    _AuthService_Authenticate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
