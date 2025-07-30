@@ -10,7 +10,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        service: ["directories"]
+        service: ["directories", "auth"]
     steps:
       - name: Install Go
         uses: actions/setup-go@v2
